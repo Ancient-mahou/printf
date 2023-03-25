@@ -1,34 +1,39 @@
-#include "main.h"
-/**
- * _printf - entry pint
- * @format: input
- * Return: integer
- */
 int _printf(const char *format, ...)
 {
-	int i = 0;
-	int len = 0;
-	va_list args;
+    int chars_printed = 0;
+    va_list args;
 
-	if (format == NULL || (format[i] == '%' && !format[i + 1]))
-	{
-		return (-1);
-	}
-	if (!format[i])
-		return (0);
-	va_start(args, format);
-	for (i = 0; format[i] != '\0'; i++)
-	{
-		if (format[i] == '%')
-		{
-			len += helper(format[i + 1], args);
-			i++;
-		}
-		else
-		{
-			len += put_char(format[i]);
-		}
-	}
-	va_end(args);
-	return (len);
+    va_start(args, format);
+    while (*format)
+    {
+        if (*format == '%')
+        {
+            format++;
+            switch (*format)
+            {
+                case 'c':
+                    putchar(va_arg(args, int));
+                    chars_printed++;
+                    break;
+                case 's':
+                    chars_printed += printf("%s", va_arg(args, char *));
+                    break;
+                case '%':
+                    putchar('%');
+                    chars_printed++;
+                    break;
+                default:
+                    break;
+            }
+        }
+        else
+        {
+            putchar(*format);
+            chars_printed++;
+        }
+        format++;
+    }
+    va_end(args);
+
+    return chars_printed;
 }
