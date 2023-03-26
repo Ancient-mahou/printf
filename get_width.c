@@ -2,7 +2,7 @@
 
 /**
  * get_width - Calculates the width for printing
- * by me001cyber & Prometheus1994
+ * by Ancient-mahou & Mibonacci
  * @format: Formatted string in which to print the arguments.
  * @i: List of arguments to be printed.
  * @list: list of arguments.
