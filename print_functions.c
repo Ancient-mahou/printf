@@ -4,7 +4,7 @@
 
 /**
  * print_char - Prints a char
- * by me001cyber & Prometheus1994
+ * by Ancient-mahou & Mibonacci
  * @types: List a of arguments
  * @buffer: Buffer array to handle print
  * @flags:  Calculates active flags
