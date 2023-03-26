@@ -4,7 +4,7 @@
 
 /**
  * main - Entry point
- * by me001cyber & Prometheus1994
+ * by Ancient-mahou & Mibonacci
  *
  * Return: Always 0
  */
