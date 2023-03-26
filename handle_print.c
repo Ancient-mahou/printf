@@ -1,7 +1,7 @@
 #include "main.h"
 /**
  * handle_print - Prints an argument based on its type
- * by me001cyber & Prometheus1994
+ * by Ancient-mahou & Mibonacci
  * @fmt: Formatted string in which to print the arguments.
  * @list: List of arguments to be printed.
  * @ind: ind.
