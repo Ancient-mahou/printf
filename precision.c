@@ -2,73 +2,36 @@
 #include <stdarg.h>
 
 /**
- * print_char - Prints character
- * @list: list of arguments
- * Return: Will return the amount of characters printed.
+ * get_precision - Calculates the precision for printing
+ * @format: Formatted string in which to print the arguments
+ * @i: List of arguments to be printed.
+ * @list: list of arguments.
+ * Return: Precision.
  */
-int print_char(va_list list)
+int get_precision(const char *format, int *i, va_list list)
 {
-	_write_char(va_arg(list, int));
-	return (1);
-}
+	int curr_i = *i + 1;
+	int precision = -1;
 
-/**
- * print_string - Prints a string
- * @list: list of arguments
- * Return: Will return the amount of characters printed.
- */
-int print_string(va_list list)
-{
-	int i;
-	char *str;
-
-	str = va_arg(list, char *);
-	if (str == NULL)
-		str = "(null)";
-	for (i = 0; str[i] != '\0'; i++)
-		_write_char(str[i]);
-	return (i);
-}
-
-/**
- * print_percent - Prints a percent symbol
- * @list: list of arguments
- * Return: Will return the amount of characters printed.
- */
-int print_percent(__attribute__((unused))va_list list)
-{
-	_write_char('%');
-	return (1);
-}
-
-/**
- * print_integer - Prints an integer
- * @list: list of arguments
- * Return: Will return the amount of characters printed.
- */
-int print_integer(va_list list)
-{
-	int num_length;
-
-	num_length = print_number(list);
-	return (num_length);
-}
-
-/**
- * unsigned_integer - Prints Unsigned integers
- * @list: List of all of the argumets
- * Return: a count of the numbers
- */
-int unsigned_integer(va_list list)
-{
-	unsigned int num;
-
-	num = va_arg(list, unsigned int);
-
-	if (num == 0)
-		return (print_unsgined_number(num));
-
-	if (num < 1)
-		return (-1);
-	return (print_unsgined_number(num));
+	if (format[curr_i] != '.')
+		return (precision);
+	precision = 0;
+	for (curr_i += 1; format[curr_i] != '\0'; curr_i++)
+	{
+		if (is_digit(format[curr_i]))
+		{
+			precision *= 10;
+			precision += format[curr_i] - '0';
+		}
+		else if (format[curr_i] == '*')
+		{
+			curr_i++;
+			precision = va_arg(list, int);
+			break;
+		}
+		else
+			break;
+	}
+	*i = curr_i - 1;
+	return (precision);
 }
